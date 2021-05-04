@@ -33,7 +33,7 @@ def _preprocess_gps_data(src_path: str, dst_path: str) -> int:
                 hour = timestamp_str[3]
                 minutes = timestamp_str[4]
                 seconds = timestamp_str[5]
-            except ValueError:
+            except IndexError:
                 pass
             else:
                 with open(path) as f:
