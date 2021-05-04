@@ -33,14 +33,15 @@ def _preprocess_gps_data(src_path: str, dst_path: str) -> int:
                 hour = timestamp_str[3]
                 minutes = timestamp_str[4]
                 seconds = timestamp_str[5]
-            except:
-                print('path error' % path)
+            except ValueError:
+                pass
             else:
                 with open(path) as f:
                     try:
                         data = json.load(f)
                     except ValueError:
-                        print('JSON error: %s' % path)
+                        pass
+                        # print('JSON error: %s' % path)
                     else:
                         lon = data['coordinates'][0]
                         if math.isnan(lon):
