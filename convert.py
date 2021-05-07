@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 import natsort
 import re
@@ -92,4 +93,8 @@ def _preprocess_gps_data(src_path: str, dst_path: str) -> int:
 
 
 if __name__ == '__main__':
-    print("Num positions: ", _preprocess_gps_data("/mnt/smb/gps", "/mnt/gps.csv"))
+    if sys.argv == 1:
+        print("Num positions: ", _preprocess_gps_data("/mnt/smb/gps", "/mnt/gps.csv"))
+    else:
+        print("Src:", sys.argv[1], " Dst:", sys.argv[2], " Num positions:",
+              _preprocess_gps_data(sys.argv[1], sys.argv[2]))
