@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 import natsort
@@ -9,6 +10,12 @@ import csv
 
 
 def _preprocess_gps_data(src_path: str, dst_path: str) -> int:
+    if os.path.exists(dst_path):
+        if os.stat(dst_path).st_size > 1024 * 1024:
+            print("{dst} exists with size {size}, skip calculation".format(dst=dst_path,
+                                                                           size=os.stat(dst_path).st_size))
+            return 0
+
     pathlist = Path(src_path).glob('**/*.json')
     list1 = []
     list2 = []
